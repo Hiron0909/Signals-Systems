@@ -72,4 +72,4 @@ stem(y_n, y, 'filled');
 xlabel('n'); 
 ylabel('y[n]');
 title('Final Sequence y[n] = 2x[n-5] - 3x[n+4]');
-grid on
+grid on;
