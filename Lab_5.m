@@ -1,6 +1,6 @@
 clc;
 clear;
-close;
+
 
 x = input('Enter the input sequence 1: ');   % sequence 1
 h = input('Enter the input sequence 2: ');   % sequence 2
