@@ -2,7 +2,7 @@ clc; clear; close all;
 
 % --- Step 1: Define n and initialize X(n) ---
 n = -7:7;                 
-x = zeros(size(n));       
+x = zeros(1,length(n));      
 
 % --- Step 2: Assign values according to the sequence ---
 x(n == -2) = 2;           % corresponds to 2δ(n+2)
