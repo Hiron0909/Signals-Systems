@@ -3,10 +3,10 @@ clear all;
 close all;
 N = 128;  %number of samples (signal length).            
 k = 0:N-1; % discrete time index            
-x = 0.25 + 2*sin(2*pi*5*k) + sin(2*pi*12.5*k) + 1.5*sin(2*pi*20*k) + 0.5*sin(2*pi*35*k);     
-X = fft(x, N);
+x = 0.25 + 2*sin(2*pi*5*k) + sin(2*pi*12.5*k) + 1.5*sin(2*pi*20*k) + 0.5*sin(2*pi*35*k);
 
-X_shifted = fftshift(X); 
+X = fft(x, N); %convert to freq domain
+X_shifted = fftshift(X); %sort the freq
       
 X_mag = abs(X_shifted)/N; % magnitude spectrum   
 f = (-N/2:N/2-1)/N; % frequency axis      
