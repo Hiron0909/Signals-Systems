@@ -1,60 +1,21 @@
-clc;
-clear all;
-close all;
+clc; clear; close all;
 
-% Step a: Generate an audio signal (pure sine wave, 440 Hz)
-Fs = 8000;              % Sampling frequency (Hz)
-T = 1/Fs;               % Sampling period
-L = 2000;               % Length of signal (number of samples)
-t = (0:L-1)*T;          % Time vector
-f = 440;                % Frequency of sine wave (Hz)
-x = sin(2*pi*f*t);      % Pure sine wave
+Fs = 8000; 
+L = 2000; 
+t = (0:L-1)/Fs;
+x = sin(2*pi*440*t);                % Original 440 Hz signal
+noisy = x + 0.5*randn(size(t));     % Add random noise
 
-% Step b: Add random noise
-noisy_signal = x + 0.5*randn(size(t));
+Y = fft(noisy);                     % FFT of noisy signal
+cutoff = 1000;                      % Cutoff frequency (Hz)
+freq = (0:L-1)*(Fs/L);              
+Y(freq > cutoff & freq < Fs-cutoff) = 0;  % Simple low-pass filter
 
-% Step c: Apply DFT (FFT in MATLAB)
-Y = fft(noisy_signal);
+cleaned = ifft(Y, 'symmetric');     % Inverse FFT to get cleaned signal
 
-% Frequency axis for plotting
-f_axis = Fs*(0:(L/2))/L;
-
-% Step d: Filter high frequencies
-% Design a simple low-pass filter by zeroing out frequencies above 1000 Hz
-cutoff = 1000;   % Hz
-Y_filtered = Y;
-Y_filtered(abs((0:L-1)-L/2) > cutoff*L/Fs) = 0;  % crude filtering
-
-% Step e: Apply Inverse DFT
-cleaned_signal = ifft(Y_filtered, 'symmetric');
-
-% -------- Plot Results --------
 figure;
+subplot(3,1,1), plot(t(1:500), noisy(1:500)), title('Noisy Signal'), ylabel('Amplitude');
+subplot(3,1,2), plot(freq(1:L/2), abs(Y(1:L/2))/L), title('Frequency Spectrum'), ylabel('|Y|');
+subplot(3,1,3), plot(t(1:500), cleaned(1:500)), title('Cleaned Signal'), xlabel('Time (s)'), ylabel('Amplitude');
 
-subplot(3,1,1);
-plot(t(1:500), noisy_signal(1:500));
-title('Noisy Signal (Time Domain)');
-xlabel('Time (s)');
-ylabel('Amplitude');
-
-subplot(3,1,2);
-P2 = abs(Y/L);
-P1 = P2(1:L/2+1);
-P1(2:end-1) = 2*P1(2:end-1);
-plot(f_axis, P1);
-title('Frequency Spectrum of Noisy Signal');
-xlabel('Frequency (Hz)');
-ylabel('|Amplitude|');
-
-subplot(3,1,3);
-plot(t(1:500), cleaned_signal(1:500));
-title('Cleaned Signal (Time Domain)');
-xlabel('Time (s)');
-ylabel('Amplitude');
-
-% Optional: Play sounds
-% sound(x, Fs);             % Original sine wave
-% pause(2);
-% sound(noisy_signal, Fs);  % Noisy signal
-% pause(2);
-% sound(cleaned_signal, Fs);% Cleaned signal
+% sound(x, Fs); pause(2); sound(noisy, Fs); pause(2); sound(cleaned, Fs);
