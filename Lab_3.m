@@ -1,3 +1,7 @@
+%Determine and Plot the Discrete-Time Sequence:X(n)=2δ(n+2)−δ(n−4)  where −7≤n≤7
+
+
+
 clc; clear; close all;
 
 % --- Step 1: Define n and initialize X(n) ---
