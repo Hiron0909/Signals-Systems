@@ -40,8 +40,8 @@ xlabel('n'); ylabel('Amplitude');
 % ---- FUNCTIONS ----
 function [y, n_out] = add_signal(x1, n1, x2, n2)
     n_out = min([n1 n2]):max([n1 n2]); % total range
-    y1 = zeros(size(n_out)); 
-    y2 = zeros(size(n_out));
+    y1 = zeros(size(n_out));          %Creates two zero arrays of the same length as n_out 
+    y2 = zeros(size(n_out));          %These will hold the aligned versions of the input signals
     y1(ismember(n_out,n1)) = x1;
     y2(ismember(n_out,n2)) = x2;
     y = y1 + y2;
