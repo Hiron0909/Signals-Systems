@@ -1,27 +1,23 @@
-%Show Power Density Spectrum of a Square Wave.
+% Show Fourier series approximation of square wave:
+%  x(t)= 4/π(sin(ω_0 t)+1/3 sin(3ω_0 t)+1/5 sin(5ω_0 t)+⋯)
 
-clc; clear; close all;
-
-A = 1;                 % Amplitude
-T = 2*pi;              % Period
-w0 = 2*pi/T;           % Fundamental frequency
-N = 25;                % Number of harmonics
-
-n = -N:N;              % Harmonic indices
-Cn = zeros(size(n));   % Initialize Fourier coefficients
-
-% Calculate Fourier coefficients (only odd harmonics)
-for k = 1:length(n)
-    if mod(n(k), 2) ~= 0          % Odd harmonics
-        Cn(k) = 2*A./(1j*pi*n(k));
-    end
-end
-
-P = abs(Cn).^2;        % Power spectrum
-
-% Plot Power Density Spectrum
-stem(n*w0, P, 'filled');
-title('Power Density Spectrum of Square Wave');
-xlabel('Frequency (rad/s)');
-ylabel('|C_n|^2');
+clc; 
+clear;
+ close all;
+ % Parameters
+ T = 2*pi;  % Period %
+ w0 = 2*pi/T;    % Fundamental frequency
+t = linspace(-2*T, 2*T, 2000);  % Time axis
+ % Fourier Series Approximation 
+N = 50; % Number of harmonics 
+x_approx = zeros(size(t));
+ for k = 1:2:N % only odd harmonics
+ x_approx = x_approx + (4/pi)*(1/k)*sin(k*w0*t);
+ end 
+% Plot 
+plot(t, x_approx, 'b', 'LineWidth', 1.5);
+ xlabel('Time (s)'); 
+ylabel('Amplitude'); 
+title(['Square Wave Approximation with N = ' num2str(N) ' harmonics']); 
 grid on;
+ ylim([-1.5 1.5]);
