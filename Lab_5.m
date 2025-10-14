@@ -1,5 +1,5 @@
 %Explain and implementation of Convolution operation of sequences.
-
+%y = conv(x, h);
 clc;
 clear;
 
