@@ -1,3 +1,6 @@
+% Finding the spectrum of the following signal: 
+% x(k)=0.25+2sin(2π⋅5k)+sin(2π⋅12.5k)+1.5sin(2π⋅20k)+0.5sin(2π⋅35k)
+
 clc;
 clear all;
 close all;
