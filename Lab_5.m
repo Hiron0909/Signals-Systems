@@ -3,8 +3,8 @@
 clc;
 clear;
 
-x = input('Enter the input sequence 1: ');   % sequence 1
-h = input('Enter the input sequence 2: ');   % sequence 2
+x = input('Enter the input sequence 1: ');   % sequence 1  %input for x = [2 3 4]
+h = input('Enter the input sequence 2: ');   % sequence 2  %input for h = [1 2 3]
 
 a	= length(x);            % Number of elements in sequence 1
 b	= length(h);            % Number of elements in sequence  2
@@ -50,7 +50,3 @@ title('Convolution of Two Signals');
 
 disp('Convolution result:');
 disp(Y);
-
-%input for x = [2 3 4]
-%input for h = [1 2 3]
-
