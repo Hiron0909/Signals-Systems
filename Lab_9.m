@@ -1,3 +1,5 @@
+%Removing noise from a signal
+
 clc; clear; close all;
 
 Fs = 8000; 
