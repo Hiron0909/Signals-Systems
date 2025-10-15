@@ -1,3 +1,6 @@
+%: Let x[n]={1,2,3,4,5,6,7,6,5,4,3,2,1}.Here bold number indicates the 0 index.
+%Determine and plot the following sequences. y[n]=2x[n−5]−3x[n+4].
+
 clc; clear; close all;
  
 % Original sequence definition
